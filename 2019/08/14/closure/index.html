@@ -16,7 +16,7 @@
 <meta property="og:description" content="闭包1. 定义闭包是指有权访问另一个函数作用域中的变量的函数。创建闭包的常见方式，就是在一个函数内部创建另一个函数。（通过原型链携带外部函数作用域的函数）。当函数返回了一个闭包时，这个函数的作用域将会一直在内存中保存到闭包不存在为止。 2. 表现​ 闭包封装了局部变量，使得函数具有状态。  在另一个函数内部定义的函数会将包含外部函数的活动对象添加到它的作用域链中 外部函数返回内部函数，外部函数执行">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://tianbaolin.github.io/images/closure.jpg">
-<meta property="og:updated_time" content="2019-08-15T04:07:43.247Z">
+<meta property="og:updated_time" content="2019-08-15T04:53:28.214Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="再谈js闭包">
 <meta name="twitter:description" content="闭包1. 定义闭包是指有权访问另一个函数作用域中的变量的函数。创建闭包的常见方式，就是在一个函数内部创建另一个函数。（通过原型链携带外部函数作用域的函数）。当函数返回了一个闭包时，这个函数的作用域将会一直在内存中保存到闭包不存在为止。 2. 表现​ 闭包封装了局部变量，使得函数具有状态。  在另一个函数内部定义的函数会将包含外部函数的活动对象添加到它的作用域链中 外部函数返回内部函数，外部函数执行">
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 810 个字)
+                    5 分钟 读完 (大约 811 个字)
                 </span>
                 
                 
@@ -173,7 +173,9 @@
 <ul>
 <li>在另一个函数内部定义的函数会将包含外部函数的活动对象添加到它的作用域链中</li>
 <li>外部函数返回内部函数，外部函数执行完毕，其执行环境的作用域链会被销毁，但它的活动对象仍然会留在内存中，因为内部函数的作用域链仍然在引用这个活动对象，直到内部函数被销毁</li>
-<li>闭包会携带包含它的函数的作用域，因此会比其他函数占用更多的内存。过度使用闭包可能会导致内存占用过多</li>
+<li>闭包会携带包含它的函数的作用域，因此会比其他函数占用更多的内存。过度使用闭包可能会导致内存占用过多<a id="more"></a>
+
+</li>
 </ul>
 <h3 id="3-实例"><a href="#3-实例" class="headerlink" title="3. 实例"></a>3. 实例</h3><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params">params</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> var1 = <span class="hljs-number">1</span>;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params">params</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> var2 = var1 + <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">c</span>(<span class="hljs-params">params</span>) </span>&#123;</span><br><span class="line">      <span class="hljs-keyword">let</span> var3 = var2 + <span class="hljs-number">1</span>;</span><br><span class="line">      <span class="hljs-keyword">return</span> var3;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">let</span> var4 = <span class="hljs-number">4</span>;</span><br><span class="line"><span class="hljs-comment">// 返回函数c</span></span><br><span class="line"><span class="hljs-keyword">let</span> d = a()();</span><br><span class="line"><span class="hljs-built_in">console</span>.log(&#123; <span class="hljs-attr">functionc</span>: d &#125;);</span><br></pre></td></tr></table></figure>
 

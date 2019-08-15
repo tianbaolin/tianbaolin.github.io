@@ -152,7 +152,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 分钟 读完 (大约 810 个字)
+                    5 分钟 读完 (大约 811 个字)
                 </span>
                 
                 
@@ -170,56 +170,17 @@
 <ul>
 <li>在另一个函数内部定义的函数会将包含外部函数的活动对象添加到它的作用域链中</li>
 <li>外部函数返回内部函数，外部函数执行完毕，其执行环境的作用域链会被销毁，但它的活动对象仍然会留在内存中，因为内部函数的作用域链仍然在引用这个活动对象，直到内部函数被销毁</li>
-<li>闭包会携带包含它的函数的作用域，因此会比其他函数占用更多的内存。过度使用闭包可能会导致内存占用过多</li>
-</ul>
-<h3 id="3-实例"><a href="#3-实例" class="headerlink" title="3. 实例"></a>3. 实例</h3><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">a</span>(<span class="hljs-params">params</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">const</span> var1 = <span class="hljs-number">1</span>;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">b</span>(<span class="hljs-params">params</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> var2 = var1 + <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">c</span>(<span class="hljs-params">params</span>) </span>&#123;</span><br><span class="line">      <span class="hljs-keyword">let</span> var3 = var2 + <span class="hljs-number">1</span>;</span><br><span class="line">      <span class="hljs-keyword">return</span> var3;</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">let</span> var4 = <span class="hljs-number">4</span>;</span><br><span class="line"><span class="hljs-comment">// 返回函数c</span></span><br><span class="line"><span class="hljs-keyword">let</span> d = a()();</span><br><span class="line"><span class="hljs-built_in">console</span>.log(&#123; <span class="hljs-attr">functionc</span>: d &#125;);</span><br></pre></td></tr></table></figure>
-
-<img src="/images/scopes.png">
-
-<ol>
-<li><p>Function c 的作用域链</p>
-<p>Closure (b) =&gt;Closure(a)=&gt;Script=&gt;Global</p>
-<p>function b 变量对象=&gt; function a 变量对象=&gt; Script 变量对象=&gt;全局变量对象</p>
-</li>
-<li><p>函数 a ，b 运行后，得到函数 c，并赋值给 d。</p>
-<p>调用栈中，a,b 执行上下文已经退栈，其自身的作用域链已经销毁。但 a,b 的变量对象（Closure (b)，Closure(a)）还保存在内存中，因为它们还被 function c 的作用域链引用。</p>
-</li>
-</ol>
-<h3 id="4-作用域链中作用域类型（变量对象类型）"><a href="#4-作用域链中作用域类型（变量对象类型）" class="headerlink" title="4. 作用域链中作用域类型（变量对象类型）"></a>4. 作用域链中作用域类型（变量对象类型）</h3><ol>
-<li><p>Closure</p>
-<p>由函数嵌套产生</p>
-</li>
-<li><p>Local</p>
-<p>由函数内部产生</p>
-</li>
-<li><p>Block</p>
-<p>由块级作用域(打括号)产生</p>
-</li>
-<li><p>Script</p>
-<p>由全局局部变量（const let）产生</p>
-</li>
-<li><p>Global</p>
-<p>全局对象（window,包括 var 声明的变量）</p>
-</li>
-</ol>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;</span><br><span class="line"><span class="hljs-keyword">let</span> d = <span class="hljs-literal">null</span>;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="hljs-keyword">let</span> b = a + <span class="hljs-number">1</span>;</span><br><span class="line">  d = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> c = b + <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">let</span> f = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> c;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="hljs-keyword">return</span> f;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-built_in">console</span>.log(<span class="hljs-string">'d'</span>, &#123; <span class="hljs-attr">d</span>: d() &#125;);</span><br></pre></td></tr></table></figure>
-
-<img src="/images/scopes_chain.png">
-
-<h3 id="5-私有变量"><a href="#5-私有变量" class="headerlink" title="5. 私有变量"></a>5. 私有变量</h3><p>​ 有权访问私有变量的公有方法叫做特权方法。</p>
-<ol>
-<li><p>构造函数实现实例私有变量</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">People</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">let</span> name = <span class="hljs-string">'tbl'</span>;</span><br><span class="line">  <span class="hljs-keyword">let</span> say = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">params</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'params'</span>, params);</span><br><span class="line">  &#125;;</span><br><span class="line">  <span class="hljs-keyword">this</span>.fun = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    say();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>原型链实现静态私有变量</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">People</span>(<span class="hljs-params">params</span>) </span>&#123;&#125;</span><br><span class="line">(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">let</span> name = <span class="hljs-string">'tbl'</span>;</span><br><span class="line">  People.prototype.say = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'name'</span>, name);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
-
-<p>这个模式与在构造函数中定义特权方法的主要区别，就在于私有变量和函数是由实例共享的。由于特权方法是在原型上定义的，因此所有实例都使用同一个函数。而这个特权方法，作为一个闭包，总是保存着对包含作用域的引用。可以使用构造函数模式、原型模式来实现自定义类型的特权方法，也可以使用模块模式、增强的模块模式来实现单例的特权方法。</p>
-</li>
-</ol>
-
+<li>闭包会携带包含它的函数的作用域，因此会比其他函数占用更多的内存。过度使用闭包可能会导致内存占用过多</li></ul>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/14/closure/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -254,7 +215,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    10 分钟 读完 (大约 1534 个字)
+                    10 分钟 读完 (大约 1535 个字)
                 </span>
                 
                 
@@ -273,89 +234,17 @@
 <li>立即响应用户；在 100 毫秒以内确认用户输入。</li>
 <li>设置动画或滚动时，在 10 毫秒以内生成帧。</li>
 <li>最大程度增加主线程的空闲时间。</li>
-<li>持续吸引用户；在 1000 毫秒以内呈现交互内容。</li>
-</ul>
-<h2 id="以用户为中心"><a href="#以用户为中心" class="headerlink" title="以用户为中心"></a>以用户为中心</h2><p>让用户成为您的性能工作的中心。用户花在网站上的大多数时间不是等待加载，而是在使用时等待响应。了解用户如何评价性能延迟：</p>
-<table>
-<thead>
-<tr>
-<th align="left">延迟与用户反应</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">0 - 16 毫秒</td>
-<td>人们特别擅长跟踪运动，如果动画不流畅，他们就会对运动心生反感。 用户可以感知每秒渲染 60 帧的平滑动画转场。也就是每帧 16 毫秒（包括浏览器将新帧绘制到屏幕上所需的时间），留给应用大约 10 毫秒的时间来生成一帧。</td>
-</tr>
-<tr>
-<td align="left">0 - 100 毫秒</td>
-<td>在此时间窗口内响应用户操作，他们会觉得可以立即获得结果。时间再长，操作与反应之间的连接就会中断。</td>
-</tr>
-<tr>
-<td align="left">100 - 300 毫秒</td>
-<td>用户会遇到轻微可觉察的延迟。</td>
-</tr>
-<tr>
-<td align="left">300 - 1000 毫秒</td>
-<td>在此窗口内，延迟感觉像是任务自然和持续发展的一部分。对于网络上的大多数用户，加载页面或更改视图代表着一个任务。</td>
-</tr>
-<tr>
-<td align="left">1000+ 毫秒</td>
-<td>超过 1 秒，用户的注意力将离开他们正在执行的任务。</td>
-</tr>
-<tr>
-<td align="left">10,000+ 毫秒</td>
-<td>用户感到失望，可能会放弃任务；之后他们或许不会再回来。</td>
-</tr>
-</tbody></table>
-<h2 id="响应：在-100-毫秒以内响应"><a href="#响应：在-100-毫秒以内响应" class="headerlink" title="响应：在 100 毫秒以内响应"></a>响应：在 100 毫秒以内响应</h2><p>​ 在用户注意到滞后之前您有 100 毫秒的时间可以响应用户输入。这适用于大多数输入，不管他们是在点击按钮、切换表单控件还是启动动画。但不适用于触摸拖动或滚动。</p>
-<p>​ 如果您未响应，操作与反应之间的连接就会中断。用户会注意到。</p>
-<p>​ 尽管很明显应立即响应用户的操作，但这并不总是正确的做法。使用此 100 毫秒窗口执行其他开销大的工作，但需要谨慎，以免妨碍用户。如果可能，请在后台执行工作。</p>
-<p>​ 对于需要超过 500 毫秒才能完成的操作，请始终提供反馈。</p>
-<h2 id="动画：在-10-毫秒内生成一帧"><a href="#动画：在-10-毫秒内生成一帧" class="headerlink" title="动画：在 10 毫秒内生成一帧"></a>动画：在 10 毫秒内生成一帧</h2><p>动画不只是奇特的 UI 效果。例如，滚动和触摸拖动就是动画类型。</p>
-<p>如果动画帧率发生变化，您的用户确实会注意到。您的目标就是每秒生成 60 帧，每一帧必须完成以下所有步骤：</p>
-<p><img src="/images/render-frame.png" alt="帧渲染步骤"></p>
-<p>从纯粹的数学角度而言，每帧的预算约为 16 毫秒（1000 毫秒 / 60 帧 = 16.66 毫秒/帧）。 但因为浏览器需要花费时间将新帧绘制到屏幕上，<strong>只有 10 毫秒来执行代码</strong>。</p>
-<p>在像动画一样的高压点中，关键是不论能不能做，什么都不要做，做最少的工作。 如果可能，请利用 100 毫秒响应预先计算开销大的工作，这样您就可以尽可能增加实现 60fps 的可能性。</p>
-<h2 id="空闲：最大程度增加空闲时间"><a href="#空闲：最大程度增加空闲时间" class="headerlink" title="空闲：最大程度增加空闲时间"></a>空闲：最大程度增加空闲时间</h2><p>利用空闲时间完成推迟的工作。例如，尽可能减少预加载数据，以便您的应用快速加载，并利用空闲时间加载剩余数据。</p>
-<p>推迟的工作应分成每个耗时约 50 毫秒的多个块。如果用户开始交互，优先级最高的事项是响应用户。</p>
-<p>要实现小于 100 毫秒的响应，应用必须在每 50 毫秒内将控制返回给主线程，这样应用就可以执行其像素管道、对用户输入作出反应，等等。</p>
-<p>以 50 毫秒块工作既可以完成任务，又能确保即时的响应。</p>
-<h2 id="加载：在-1000-毫秒以内呈现内容"><a href="#加载：在-1000-毫秒以内呈现内容" class="headerlink" title="加载：在 1000 毫秒以内呈现内容"></a>加载：在 1000 毫秒以内呈现内容</h2><p>在 1 秒钟内加载您的网站。否则，用户的注意力会分散，他们处理任务的感觉会中断。</p>
-<p>侧重于<a href="https://developers.google.com/web/fundamentals/performance/critical-rendering-path/" target="_blank" rel="noopener">优化关键渲染路径</a>以取消阻止渲染。</p>
-<p>您无需在 1 秒内加载所有内容以产生完整加载的感觉。启用渐进式渲染和在后台执行一些工作。将非必需的加载推迟到空闲时间段</p>
-<h2 id="关键-RAIL-指标汇总"><a href="#关键-RAIL-指标汇总" class="headerlink" title="关键 RAIL 指标汇总"></a>关键 RAIL 指标汇总</h2><table>
-<thead>
-<tr>
-<th align="left">RAIL 步骤</th>
-<th align="left">关键指标</th>
-<th align="left">用户操作</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left"><strong>响应</strong></td>
-<td align="left">输入延迟时间（从点按到绘制）小于 100 毫秒。</td>
-<td align="left">用户点按按钮（例如打开导航）。</td>
-</tr>
-<tr>
-<td align="left"><strong>动画</strong></td>
-<td align="left">每个帧的工作（从 JS 到绘制）完成时间小于 16 毫秒。</td>
-<td align="left">用户滚动页面，拖动手指（例如，打开菜单）或看到动画。 拖动时，应用的响应与手指位置有关（例如，拉动刷新、滑动轮播）。 此指标仅适用于拖动的持续阶段，不适用于开始阶段。</td>
-</tr>
-<tr>
-<td align="left"><strong>空闲</strong></td>
-<td align="left">主线程 JS 工作分成不大于 50 毫秒的块。</td>
-<td align="left">用户没有与页面交互，但主线程应足够用于处理下一个用户输入。</td>
-</tr>
-<tr>
-<td align="left"><strong>加载</strong></td>
-<td align="left">页面可以在 1000 毫秒内就绪。</td>
-<td align="left">用户加载页面并看到关键路径内容。</td>
-</tr>
-</tbody></table>
-
+<li>持续吸引用户；在 1000 毫秒以内呈现交互内容。</li></ul>
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/14/performence-measure-model/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -386,7 +275,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 分钟 读完 (大约 121 个字)
+                    1 分钟 读完 (大约 122 个字)
                 </span>
                 
                 
@@ -403,18 +292,16 @@
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="hljs-string">"My New Post"</span></span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/14/hello-world/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
