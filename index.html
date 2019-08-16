@@ -133,6 +133,76 @@
     <div class="card">
     
     <div class="card-image">
+        <a href="/2019/08/16/http/" class="image is-7by1">
+            <img class="thumbnail" src="/images/http1.png" alt="再谈http">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-08-16T10:18:27.000Z">2019-08-16</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/网络协议/">网络协议</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    30 分钟 读完 (大约 4443 个字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/08/16/http/">再谈http</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="1-TCP-IP-通信传输流"><a href="#1-TCP-IP-通信传输流" class="headerlink" title="1. TCP/IP 通信传输流"></a>1. TCP/IP 通信传输流</h3><p>​        利用 TCP/IP 协议族进行网络通信时，会通过分层顺序与对方进行通信。发送端从应用层往下走，接收端则从链路层往上走。</p>
+<ul>
+<li>首先作为发送端的客户端在应用层（HTTP 协议）发出一个想看某个 Web 页面的 HTTP 请求。</li>
+<li>接着，为了传输方便，在传输层（TCP 协议）把从应用层处收到的数据（HTTP 请求报文）进行分割，并在各个报文上打上标记序号及端口号后转发给网络层。</li>
+<li>在网络层（IP 协议），增加作为通信目的地的 MAC 地址后转发给链路层。这样一来，发往网络的通信请求就准备齐全了。</li>
+<li>接收端的服务器在链路层接收到数据，按序往上层发送，一直到应用层。当传输到应用层，才能算真正接收到由客户端发送过来的 HTTP请求。</li>
+</ul>
+<p><img src="/images/http2.png" alt="image-20190816110148702"></p>
+<h3 id="2-HTTP-概述"><a href="#2-HTTP-概述" class="headerlink" title="2. HTTP 概述"></a>2. HTTP 概述</h3><ul>
+<li><strong>超文本传输协议</strong>（英语：<strong>H</strong>yper<strong>T</strong>ext <strong>T</strong>ransfer <strong>P</strong>rotocol，缩写：<strong>HTTP</strong>）是一种用于分布式、协作式和<a href="https://zh.wikipedia.org/wiki/超媒體" target="_blank" rel="noopener">超媒体</a>信息系统的应用层协议。HTTP是<a href="https://zh.wikipedia.org/wiki/全球資訊網" target="_blank" rel="noopener">万维网</a>的数据通信的基础。</li>
+<li>HTTP属于OSI模型中的应用层协议，通常建立在TCP协议之上。</li>
+<li>HTTP消息是服务器和客户端之间交换数据的方式。有两种类型的消息︰ 请求（requests）–由客户端发送用来触发一个服务器上的动作；响应（responses）–来自服务器的应答。</li>
+</ul>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/08/16/http/#more">阅读更多</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    <div class="card">
+    
+    <div class="card-image">
         <a href="/2019/08/16/OSI-model/" class="image is-7by1">
             <img class="thumbnail" src="/images/OSI_model.png" alt="OSI参考模型">
         </a>
@@ -431,7 +501,7 @@
                         文章
                     </p>
                     <p class="title has-text-weight-normal">
-                        4
+                        5
                     </p>
                 </div>
             </div>
@@ -451,7 +521,7 @@
                         标签
                     </p>
                     <p class="title has-text-weight-normal">
-                        3
+                        4
                     </p>
                 </div>
             </div>
@@ -540,7 +610,7 @@
         <h3 class="menu-label">
             标签云
         </h3>
-        <a href="/tags/OSI-网络模型/" style="font-size: 10px;">OSI 网络模型</a> <a href="/tags/性能评估模型/" style="font-size: 10px;">性能评估模型</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
+        <a href="/tags/OSI-网络模型/" style="font-size: 10px;">OSI 网络模型</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/性能评估模型/" style="font-size: 10px;">性能评估模型</a> <a href="/tags/闭包/" style="font-size: 10px;">闭包</a>
     </div>
 </div>
 
@@ -554,6 +624,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/2019/08/16/http/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/http1.png" alt="再谈http">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-16T10:18:27.000Z">2019-08-16</time></div>
+                    <a href="/2019/08/16/http/" class="title has-link-black-ter is-size-6 has-text-weight-normal">再谈http</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/网络协议/">网络协议</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -649,7 +738,7 @@
                     <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -689,7 +778,7 @@
                 <span class="level-item">网络协议</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li>
             </ul>
@@ -708,6 +797,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/OSI-网络模型/">
                         <span class="tag">OSI 网络模型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/http/">
+                        <span class="tag">http</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
@@ -751,6 +847,25 @@
         
         <article class="media">
             
+            <a href="/2019/08/16/http/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/http1.png" alt="再谈http">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-08-16T10:18:27.000Z">2019-08-16</time></div>
+                    <a href="/2019/08/16/http/" class="title has-link-black-ter is-size-6 has-text-weight-normal">再谈http</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/网络协议/">网络协议</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
             <a href="/2019/08/16/OSI-model/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/OSI_model.png" alt="OSI参考模型">
@@ -843,7 +958,7 @@
                     <span class="level-item">八月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">5</span>
                 </span>
             </a>
         </li>
@@ -883,7 +998,7 @@
                 <span class="level-item">网络协议</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li>
             </ul>
@@ -902,6 +1017,13 @@
                 <div class="control">
                     <a class="tags has-addons" href="/tags/OSI-网络模型/">
                         <span class="tag">OSI 网络模型</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/tags/http/">
+                        <span class="tag">http</span>
                         <span class="tag is-grey">1</span>
                     </a>
                 </div>
